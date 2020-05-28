@@ -6,8 +6,8 @@ const config = {
         main: './main'
     },
     output: {
-        path: path.join(__dirname, './static/dist'),
-        publicPath: './dist/',
+        path: path.join(__dirname, './dist/static/'),
+        publicPath: '/dist/',
         filename: 'main.js'
     },
     module: {
@@ -37,8 +37,12 @@ const config = {
             },
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015']
+                    }
+                }]
             },
             {
                 test: /\.css$/,
@@ -49,7 +53,7 @@ const config = {
             },
             {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
-                loader: 'url-loader?limit=1024'
+                loader: 'url-loader'
             }
         ]
     },
